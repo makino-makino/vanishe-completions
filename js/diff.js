@@ -3,13 +3,13 @@ const getLastSameCharIndex = (longer, shorter) => {
   var result = null;
 
   shorter.forEach((value, index, list) => {
-    if (result) return
-    
+    if (result) return;
+
     const l = longer[index];
     const s = shorter[index];
 
-    console.log(l, s)
-    console.log(l != s)
+    console.log(l, s);
+    console.log(l != s);
 
     if (l != s) {
       result = index;
@@ -17,15 +17,15 @@ const getLastSameCharIndex = (longer, shorter) => {
     }
   });
 
-  return result
+  return result;
 };
 
 const calcDiff = (before, after) => {
   var longer = null;
   var shorter = null;
 
-  before = before.split('')
-  after = after.split('')
+  before = before.split("");
+  after = after.split("");
 
   if (before.length > after.length) {
     longer = before;
@@ -35,17 +35,17 @@ const calcDiff = (before, after) => {
     shorter = before;
   }
 
-  const first = getLastSameCharIndex(longer=longer, shorter=shorter);
+  const first = getLastSameCharIndex((longer = longer), (shorter = shorter));
 
-  longer.reverse()
-  shorter.reverse()
+  longer.reverse();
+  shorter.reverse();
 
-  const last = getLastSameCharIndex(longer=longer, shorter=shorter)
+  const last = getLastSameCharIndex((longer = longer), (shorter = shorter));
 
-  after.reverse()
-  const diff = after.slice(first, after.length - last).join('')
+  after.reverse();
+  const diff = after.slice(first, after.length - last).join("");
 
-  return {diff, first, last}
+  return { diff, first, last };
 };
 
 class CurrentDiff {
@@ -57,7 +57,7 @@ class CurrentDiff {
   read() {
     const msg = this.io.read();
 
-    const diff = calcDiff(before=this.before, after=msg)
+    const diff = calcDiff((before = this.before), (after = msg));
 
     this.before = msg;
 
@@ -72,4 +72,4 @@ class CurrentDiff {
 
 a = calcDiff("私、赤間です", "私はです");
 
-console.log(a)
+console.log(a);
