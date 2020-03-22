@@ -48,7 +48,7 @@ const calcDiff = (before, after) => {
   return {diff, first, last}
 };
 
-class currentDiff {
+class CurrentDiff {
   constructor(io) {
     this.io = io;
     this.before = "";
