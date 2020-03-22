@@ -3,11 +3,10 @@
   "version": "0.1.0",
   "manifest_version": 2,
   "description": "ばにしぇが邪魔をします",
-  "content_scripts": [{
-    "matches": ["https://*/*"],
-    "js": [
-      "js/content.js",
-      "js/io.js"
-    ]
-  }]
+  "content_scripts": [
+    {
+      "matches": ["https://*/*"],
+      "js": ["js/io.js", "js/diff.js", "js/content.js"]
+    }
+  ]
 }
