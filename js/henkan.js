@@ -12,6 +12,8 @@ class Henkan {
     this.dictinoaries = DICTIONARIES;
     this.before_target = "";
     this.henkanIndex = 0;
+
+    this.henkanList = [];
   }
 
   generateHenkanList(target) {
