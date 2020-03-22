@@ -42,7 +42,7 @@ const calcDiff = (before, after) => {
 
   const last = getLastSameCharIndex(longer=longer, shorter=shorter)
 
-  longer.reverse()
+  after.reverse()
   const diff = after.slice(first, after.length - last).join('')
 
   return {diff, first, last}
@@ -56,10 +56,11 @@ class currentDiff {
 
   read() {
     const msg = this.io.read();
+
+    const diff = calcDiff(before=this.before, after=msg)
+
     this.before = msg;
 
-    // ここで差分を探す
-    diff = "";
     return diff;
   }
 
@@ -69,6 +70,6 @@ class currentDiff {
   }
 }
 
-a = calcDiff("私、赤間です", "私は構成です");
+a = calcDiff("私、赤間です", "私はです");
 
 console.log(a)
