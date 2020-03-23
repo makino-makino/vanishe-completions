@@ -21,7 +21,7 @@ window.addEventListener("input", e => {
 });
 
 window.addEventListener(
-  "keydown",
+  "keyup",
   e => {
     userInput = io.read();
 
