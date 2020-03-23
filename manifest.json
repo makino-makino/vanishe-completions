@@ -11,6 +11,7 @@
         "js/io.js",
         "js/diff.js",
         "js/henkan.js",
+        "js/completion.js",
         "js/content.js"
       ]
     }
