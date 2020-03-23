@@ -34,11 +34,12 @@ const takeDiff = ({ before, after }) => {
   const reversedLonger = longer.slice().reverse();
   const reversedShorter = shorter.slice().reverse();
 
-  const last =
-    after.length -
-    getLastSameCharIndex({ shorter: reversedShorter, longer: reversedLonger });
+  const last = getLastSameCharIndex({
+    shorter: reversedShorter,
+    longer: reversedLonger
+  });
 
-  const diff = after.slice(first, last).join("");
+  const diff = after.slice(first, after.length - last).join("");
 
   return { diff, first, last };
 };
@@ -49,12 +50,20 @@ class DiffTaker {
   }
 
   diff(msg) {
+    console.log(this.before, msg);
     const diff = takeDiff({ before: this.before, after: msg });
     return diff;
   }
 
   commit(msg) {
     this.before = msg;
+  }
+
+  apply({ base, patch, first, last }) {
+    const first_str = base.substr(0, first);
+    const last_str = base.substr(base.length - last);
+
+    return first_str + patch + last_str;
   }
 }
 
