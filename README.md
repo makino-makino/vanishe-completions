@@ -1,2 +1,2 @@
-# vanishe-supporter
-ばにしぇがあなたのIMEとしてサポート（邪魔）します
+# vanishe-completions
+あなたの心のばにしぇを補完します
