@@ -18,6 +18,8 @@ const cloudCompletion = new Completion({
 var userInput = "";
 var io = null;
 
+update();
+
 window.addEventListener("input", e => {
   var type = null;
 
