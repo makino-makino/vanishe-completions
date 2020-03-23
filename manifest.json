@@ -5,7 +5,7 @@
   "description": "ばにしぇが邪魔をします",
   "content_scripts": [
     {
-      "matches": ["https://*/*"],
+      "matches": ["https://*/*", "http://*/*"],
       "js": ["js/io.js", "js/diff.js", "js/henkan.js", "js/content.js"]
     }
   ]
