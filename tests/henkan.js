@@ -4,22 +4,22 @@ const henkan = new Henkan();
 
 const testGenerateHenkanList = () => {
   const target = "ばにしぇ";
-  const except = "ばにしぇだよ〜〜〜ｗｗｗｗｗ";
+  const expected = "ばにしぇだよ〜〜〜ｗｗｗｗｗ";
 
   const result = henkan.generateHenkanList(target);
-  console.log(result[1] == except);
+  console.log(result[1] == expected);
 };
 
 const testHenkan = () => {
   const target = "ばにしぇ";
-  const except1 = "ばにしぇ";
-  const except2 = "ばにしぇだよ〜〜〜ｗｗｗｗｗ";
+  const expected1 = "ばにしぇ";
+  const expected2 = "ばにしぇだよ〜〜〜ｗｗｗｗｗ";
 
   const result1 = henkan.henkan(target, 0);
-  console.log(result1 == except1);
+  console.log(result1 == expected1);
 
   const result2 = henkan.henkan(target, 1);
-  console.log(result2 == except2);
+  console.log(result2 == expected2);
 };
 
 console.log("generateHenkanList:");
