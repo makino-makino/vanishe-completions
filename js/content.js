@@ -1,7 +1,9 @@
-const F7_KEYCODE = 118;
-const F8_KEYCODE = 119;
-const ENTER_KEYCODE = 13;
-const SPACE_KEYCODE = 32;
+const KEYCODE = {
+  F7: 118,
+  F8: 119,
+  ENETR: 13,
+  SPACE: 32
+};
 
 const normalCompletion = new Completion({
   diffTaker: new DiffTaker(),
@@ -32,13 +34,14 @@ window.addEventListener(
   "keyup",
   async e => {
     userInput = io.read();
+    const keyCode = e.keyCode;
 
-    if ([ENTER_KEYCODE, SPACE_KEYCODE].indexOf(e.keyCode) != -1) {
+    if ([KEYCODE.ENETR, KEYCODE.SPACE].indexOf(keyCode) != -1) {
       normalCompletion.diffTaker.commit(userInput);
-    } else if (e.keyCode == F7_KEYCODE) {
+    } else if (keyCode == KEYCODE.F7) {
       const result = await normalCompletion.complete();
       io.write(result);
-    } else if (e.keyCode == F8_KEYCODE) {
+    } else if (keyCode == KEYCODE.F8) {
       const result = await cloudCompletion.complete();
       io.write(result);
     }
