@@ -47,32 +47,15 @@ const testDiffTaker = () => {
 
   console.log(result.diff == expected);
 
-  const apply_excpected = "ばにしぇはおじさん";
-  const apply_result = diffTaker.apply({
+  const applyExcpected = "ばにしぇはおじさん";
+  const applyResult = diffTaker.apply({
     base: after,
     patch: "はおじさん",
     first: result.first,
     last: result.last
   });
 
-  // const apply_result2 = diffTaker.apply({
-  //   base: apply_result,
-  //   patch: "は神",
-  //   first: result.first,
-  //   last: result.last
-  // });
-
-  // const apply_result3 = diffTaker.apply({
-  //   base: apply_result,
-  //   patch: "はエンジニア",
-  //   first: result.first,
-  //   last: result.last
-  // });
-
-  // console.log(apply_result2);
-  // console.log(apply_result3);
-
-  console.log(apply_result == apply_excpected);
+  console.log(applyResult == applyExcpected);
 };
 
 console.log("getLastSameCharIndex:");

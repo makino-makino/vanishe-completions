@@ -60,10 +60,10 @@ class DiffTaker {
   }
 
   apply({ base, patch, first, last }) {
-    const first_str = base.substr(0, first);
-    const last_str = base.substr(base.length - last);
+    const firstStr = base.substr(0, first);
+    const lastStr = base.substr(base.length - last);
 
-    return first_str + patch + last_str;
+    return firstStr + patch + lastStr;
   }
 }
 

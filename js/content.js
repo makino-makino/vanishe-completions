@@ -25,14 +25,14 @@ window.addEventListener(
   e => {
     userInput = io.read();
 
-    if (e.keyCode == F7_KEYCODE) {
+    if ([13, 32].indexOf(e.keyCode) != -1) {
       diffTaker.commit(userInput);
     } else if (e.keyCode == F8_KEYCODE) {
       let { diff, first, last } = diffTaker.diff(userInput);
-      const henkaned_word = henkan.henkan(diff, 1);
+      const henkanedWord = henkan.henkan(diff, 1);
       const result = diffTaker.apply({
         base: userInput,
-        patch: henkaned_word,
+        patch: henkanedWord,
         first,
         last
       });
