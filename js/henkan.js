@@ -1,3 +1,5 @@
+axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
+
 const SAMPLE_DICTIONARY = [
   {
     name: "ばにしぇだよ〜wwwwww",
@@ -9,37 +11,29 @@ const SAMPLE_DICTIONARY = [
   }
 ];
 
-const DICTIONARIES = [SAMPLE_DICTIONARY];
+const NORMAL_DICTIONARIES = [SAMPLE_DICTIONARY];
+const CLOUD_HENKAN_URLS = [
+  "http://localhost:5000/ojichat",
+  "http://localhost:5000/echo-sd"
+];
 
-class Henkan {
+class AbstractHenkan {
   constructor() {
-    this.dictinoaries = DICTIONARIES;
-    this.before_diff = "";
     this.henkanIndex = 0;
 
     this.henkanList = [];
   }
 
-  generateHenkanList(target) {
-    const hits = [target];
-
-    for (let dictinoary of this.dictinoaries) {
-      for (let word of dictinoary) {
-        if (!word.hurigana.indexOf(target)) {
-          hits.push(word.name);
-        }
-      }
-    }
-
-    return hits;
+  async generateHenkanList(diff) {
+    throw new Error("No implementation");
   }
 
-  henkan(diff, selecter) {
+  async henkan(diff, selecter) {
     // selecter は-1か1
 
     console.log(this.henkanList.indexOf(diff), diff);
     if (this.henkanList.indexOf(diff) == -1) {
-      this.henkanList = this.generateHenkanList(diff);
+      this.henkanList = await this.generateHenkanList(diff);
       this.henkanIndex = 0;
     }
 
@@ -51,6 +45,48 @@ class Henkan {
     const result = this.henkanList[this.henkanIndex];
 
     return result;
+  }
+}
+
+class Henkan extends AbstractHenkan {
+  constructor() {
+    super();
+  }
+
+  async generateHenkanList(diff) {
+    const hits = [diff];
+
+    for (let dictinoary of NORMAL_DICTIONARIES) {
+      for (let word of dictinoary) {
+        if (!word.hurigana.indexOf(diff)) {
+          hits.push(word.name);
+        }
+      }
+    }
+
+    return hits;
+  }
+}
+
+class CloudHenkan extends AbstractHenkan {
+  constructor() {
+    super();
+
+    this.beforeMessage = "";
+    this.henkanIndex = 0;
+  }
+
+  async generateHenkanList(diff) {
+    const hits = [diff];
+
+    for (let url of CLOUD_HENKAN_URLS) {
+      const msg = encodeURIComponent(diff);
+      const res = await axios.get(`${url}?msg=${msg}`);
+      const converted = `${decodeURI(res.data.result)}\n`;
+      hits.push(converted);
+    }
+
+    return hits;
   }
 }
 

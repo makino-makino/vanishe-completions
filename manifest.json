@@ -6,7 +6,13 @@
   "content_scripts": [
     {
       "matches": ["https://*/*", "http://*/*"],
-      "js": ["js/io.js", "js/diff.js", "js/henkan.js", "js/content.js"]
+      "js": [
+        "lib/axios.js",
+        "js/io.js",
+        "js/diff.js",
+        "js/henkan.js",
+        "js/content.js"
+      ]
     }
   ]
 }
