@@ -16,7 +16,6 @@ const getLocalStorage = (key = null) => {
 
 const update = async () => {
   let dict = await getLocalStorage("dict");
-  console.log(dict);
 
   let first = 0;
 
@@ -24,7 +23,6 @@ const update = async () => {
     dict = [];
   } else {
     first = Number(dict[dict.length - 1].id) + 1;
-    console.log(first);
   }
 
   const res = await axios.get(`${UPDATE_URL}?first=${first}`);
@@ -39,7 +37,6 @@ const update = async () => {
   await setLocalStorage({ dict: result });
 
   dict = await getLocalStorage("dict");
-  console.log(dict);
 };
 
 const reset = async () => {

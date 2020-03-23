@@ -2,12 +2,12 @@ axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 
 const SAMPLE_DICTIONARY = [
   {
-    name: "ばにしぇだよ〜wwwwww",
-    hurigana: "ばにしぇだよ〜〜〜"
+    kaki: "ばにしぇだよ〜wwwwww",
+    yomi: "ばにしぇだよ〜〜〜"
   },
   {
-    name: "イー↓シャン↑リンチー↓チン↑シャオ↓ラー！(威嚇)",
-    hurigana: "いーしゃんりんちーしゃーおーらー"
+    kaki: "イー↓シャン↑リンチー↓チン↑シャオ↓ラー！(威嚇)",
+    yomi: "いーしゃんりんちーしゃーおーらー"
   }
 ];
 
@@ -56,10 +56,17 @@ class Henkan extends AbstractHenkan {
   async generateHenkanList(diff) {
     const hits = [diff];
 
-    for (let dictinoary of NORMAL_DICTIONARIES) {
+    const localDict = await getLocalStorage("dict");
+
+    const dictinaries = NORMAL_DICTIONARIES.slice();
+    dictinaries.push(localDict);
+
+    console.log(dictinaries);
+
+    for (let dictinoary of dictinaries) {
       for (let word of dictinoary) {
-        if (!word.hurigana.indexOf(diff)) {
-          hits.push(word.name);
+        if (!word.yomi.indexOf(diff)) {
+          hits.push(word.kaki);
         }
       }
     }
