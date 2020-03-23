@@ -10,14 +10,13 @@ const DICTIONARIES = [SAMPLE_DICTIONARY];
 class Henkan {
   constructor() {
     this.dictinoaries = DICTIONARIES;
-    this.before_target = "";
+    this.before_diff = "";
     this.henkanIndex = 0;
 
     this.henkanList = [];
   }
 
   generateHenkanList(target) {
-    console.log(target);
     const hits = [target];
 
     for (let dictinoary of this.dictinoaries) {
@@ -31,19 +30,23 @@ class Henkan {
     return hits;
   }
 
-  henkan(target, selecter) {
+  henkan(diff, selecter) {
     // selecter は-1か1
-    if (target != this.before_target) {
-      this.henkanList = this.generateHenkanList(target);
+
+    console.log(this.henkanList.indexOf(diff), diff);
+    if (this.henkanList.indexOf(diff) == -1) {
+      this.henkanList = this.generateHenkanList(diff);
       this.henkanIndex = 0;
     }
 
-    if (!this.henkanList.length) return target;
+    if (!this.henkanList.length) return diff;
 
     this.henkanIndex += selecter;
     this.henkanIndex %= this.henkanList.length;
 
-    return this.henkanList[this.henkanIndex];
+    const result = this.henkanList[this.henkanIndex];
+
+    return result;
   }
 }
 
