@@ -2,7 +2,7 @@
   "name": "Vanishe Supporter",
   "version": "0.1.0",
   "manifest_version": 2,
-  "description": "ばにしぇが邪魔をします",
+  "description": "あなたの心のばにしぇを補完します",
   "content_scripts": [
     {
       "matches": ["https://*/*", "http://*/*"],
@@ -11,6 +11,7 @@
         "js/io.js",
         "js/diff.js",
         "js/henkan.js",
+        "js/completion.js",
         "js/content.js"
       ]
     }

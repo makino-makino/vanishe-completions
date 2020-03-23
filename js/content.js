@@ -1,13 +1,22 @@
-const diffTaker = new DiffTaker();
-const F7_KEYCODE = 118;
-const F8_KEYCODE = 119;
+const KEYCODE = {
+  F7: 118,
+  F8: 119,
+  ENETR: 13,
+  SPACE: 32
+};
 
-// enter, esc, space, 矢印
+const normalCompletion = new Completion({
+  diffTaker: new DiffTaker(),
+  henkan: new Henkan()
+});
+
+const cloudCompletion = new Completion({
+  diffTaker: new DiffTaker(),
+  henkan: new CloudHenkan()
+});
 
 var userInput = "";
 var io = null;
-var normalHenkan = new Henkan();
-var cloudHenkan = new CloudHenkan();
 
 window.addEventListener("input", e => {
   var type = null;
@@ -24,28 +33,17 @@ window.addEventListener("input", e => {
 window.addEventListener(
   "keyup",
   async e => {
-    doHenkan = async henkan => {
-      let { diff, first, last } = diffTaker.diff(userInput);
-      const henkanedWord = await henkan.henkan(diff, 1);
-      const result = diffTaker.apply({
-        base: userInput,
-        patch: henkanedWord,
-        first,
-        last
-      });
-
-      io.write(result);
-      return henkan;
-    };
-
     userInput = io.read();
+    const keyCode = e.keyCode;
 
-    if ([13, 32].indexOf(e.keyCode) != -1) {
-      diffTaker.commit(userInput);
-    } else if (e.keyCode == F7_KEYCODE) {
-      normalHenkan = await doHenkan(normalHenkan);
-    } else if (e.keyCode == F8_KEYCODE) {
-      cloudHenkan = await doHenkan(cloudHenkan);
+    if ([KEYCODE.ENETR, KEYCODE.SPACE].indexOf(keyCode) != -1) {
+      normalCompletion.diffTaker.commit(userInput);
+    } else if (keyCode == KEYCODE.F7) {
+      const result = await normalCompletion.complete();
+      io.write(result);
+    } else if (keyCode == KEYCODE.F8) {
+      const result = await cloudCompletion.complete();
+      io.write(result);
     }
   },
   true
