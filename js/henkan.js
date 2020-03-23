@@ -1,7 +1,11 @@
 const SAMPLE_DICTIONARY = [
   {
-    name: "ばにしぇだよ〜〜〜ｗｗｗｗｗ",
+    name: "ばにしぇだよ〜wwwwww",
     hurigana: "ばにしぇだよ〜〜〜"
+  },
+  {
+    name: "イー↓シャン↑、リンチー↓チン↑シャオ↓ラー！(威嚇)",
+    hurigana: "いーしゃんりんちーしゃーおーらー"
   }
 ];
 
