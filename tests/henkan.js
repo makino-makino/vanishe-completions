@@ -4,16 +4,17 @@ const henkan = new Henkan();
 
 const testGenerateHenkanList = () => {
   const target = "ばにしぇ";
-  const expected = "ばにしぇだよ〜〜〜ｗｗｗｗｗ";
+  const expected = "ばにしぇだよ〜wwwwww";
 
   const result = henkan.generateHenkanList(target);
+  console.log(result)
   console.log(result[1] == expected);
 };
 
 const testHenkan = () => {
   const target = "ばにしぇ";
   const expected1 = "ばにしぇ";
-  const expected2 = "ばにしぇだよ〜〜〜ｗｗｗｗｗ";
+  const expected2 = "ばにしぇだよ〜wwwwww";
 
   const result1 = henkan.henkan(target, 0);
   console.log(result1 == expected1);

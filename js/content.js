@@ -6,7 +6,8 @@ const F8_KEYCODE = 119;
 
 var userInput = "";
 var io = null;
-const henkan = new Henkan();
+var normalHenkan = new Henkan();
+var cloudHenkan = new CloudHenkan();
 
 window.addEventListener("input", e => {
   var type = null;
@@ -22,14 +23,10 @@ window.addEventListener("input", e => {
 
 window.addEventListener(
   "keyup",
-  e => {
-    userInput = io.read();
-
-    if ([13, 32].indexOf(e.keyCode) != -1) {
-      diffTaker.commit(userInput);
-    } else if (e.keyCode == F8_KEYCODE) {
+  async e => {
+    doHenkan = async henkan => {
       let { diff, first, last } = diffTaker.diff(userInput);
-      const henkanedWord = henkan.henkan(diff, 1);
+      const henkanedWord = await henkan.henkan(diff, 1);
       const result = diffTaker.apply({
         base: userInput,
         patch: henkanedWord,
@@ -38,6 +35,17 @@ window.addEventListener(
       });
 
       io.write(result);
+      return henkan;
+    };
+
+    userInput = io.read();
+
+    if ([13, 32].indexOf(e.keyCode) != -1) {
+      diffTaker.commit(userInput);
+    } else if (e.keyCode == F7_KEYCODE) {
+      normalHenkan = await doHenkan(normalHenkan);
+    } else if (e.keyCode == F8_KEYCODE) {
+      cloudHenkan = await doHenkan(cloudHenkan);
     }
   },
   true
