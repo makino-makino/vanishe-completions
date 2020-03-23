@@ -50,7 +50,6 @@ class DiffTaker {
   }
 
   diff(msg) {
-    console.log(this.before, msg);
     const diff = takeDiff({ before: this.before, after: msg });
     return diff;
   }
