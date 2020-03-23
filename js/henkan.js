@@ -9,29 +9,17 @@ const SAMPLE_DICTIONARY = [
   }
 ];
 
-const DICTIONARIES = [SAMPLE_DICTIONARY];
+const NORMAL_DICTIONARIES = [SAMPLE_DICTIONARY];
 
-class Henkan {
+class AbstractHenkan {
   constructor() {
-    this.dictinoaries = DICTIONARIES;
-    this.before_diff = "";
     this.henkanIndex = 0;
 
     this.henkanList = [];
   }
 
-  generateHenkanList(target) {
-    const hits = [target];
-
-    for (let dictinoary of this.dictinoaries) {
-      for (let word of dictinoary) {
-        if (!word.hurigana.indexOf(target)) {
-          hits.push(word.name);
-        }
-      }
-    }
-
-    return hits;
+  generateHenkanList(diff) {
+    throw new Error("No implementation");
   }
 
   henkan(diff, selecter) {
@@ -51,6 +39,26 @@ class Henkan {
     const result = this.henkanList[this.henkanIndex];
 
     return result;
+  }
+}
+
+class Henkan extends AbstractHenkan {
+  constructor() {
+    super();
+  }
+
+  generateHenkanList(diff) {
+    const hits = [diff];
+
+    for (let dictinoary of NORMAL_DICTIONARIES) {
+      for (let word of dictinoary) {
+        if (!word.hurigana.indexOf(diff)) {
+          hits.push(word.name);
+        }
+      }
+    }
+
+    return hits;
   }
 }
 
