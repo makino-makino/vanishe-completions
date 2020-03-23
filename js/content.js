@@ -1,11 +1,14 @@
 const diffTaker = new DiffTaker();
-const F2_KEYCODE = 113;
+const F7_KEYCODE = 118;
+const F8_KEYCODE = 119;
+
+// enter, esc, space, 矢印
 
 var userInput = "";
 var io = null;
 const henkan = new Henkan();
 
-const reloadUserInput = () => {
+window.addEventListener("input", e => {
   var type = null;
 
   const target = document.activeElement;
@@ -14,29 +17,19 @@ const reloadUserInput = () => {
   else if (target.innerText) type = TYPES.INNER_TEXT;
   else return;
 
-  io = new ElementIO(target, type);
-  userInput = io.read();
-  return userInput;
-};
-
-window.addEventListener("keypress", e => reloadUserInput, false);
+  io = new ElementIO(e.target, type);
+});
 
 window.addEventListener(
   "keydown",
   e => {
-    if (e.keyCode == F2_KEYCODE) {
-      reloadUserInput();
+    userInput = io.read();
 
+    if (e.keyCode == F8_KEYCODE) {
+      diffTaker.commit(userInput);
+    } else if (e.keyCode == F7_KEYCODE) {
       let { diff, first, last } = diffTaker.diff(userInput);
-
-      // diffTaker.commit(userInput);
-
-      // console.log({ diff, first, last });
-
       const henkaned_word = henkan.henkan(diff, 1);
-
-      // console.log(henkaned_word);
-
       const result = diffTaker.apply({
         base: userInput,
         patch: henkaned_word,
@@ -47,5 +40,5 @@ window.addEventListener(
       io.write(result);
     }
   },
-  false
+  true
 );
