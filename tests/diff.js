@@ -28,10 +28,10 @@ const testTakeDiff = () => {
   const before = "ばにしぇだぞ〜〜〜ｗｗｗｗｗ";
   const after = "ばにしぇってなんやねん";
 
-  const expected = "ってなんやねん";
-  const result = takeDiff({ before, after });
+  const diff_expected = "ってなんやねん";
+  const diff_result = takeDiff({ before, after });
 
-  console.log(result.diff == expected);
+  console.log(diff_result.diff == diff_expected);
 };
 
 const testDiffTaker = () => {
@@ -46,6 +46,33 @@ const testDiffTaker = () => {
   const result = diffTaker.diff(after);
 
   console.log(result.diff == expected);
+
+  const apply_excpected = "ばにしぇはおじさん";
+  const apply_result = diffTaker.apply({
+    base: after,
+    patch: "はおじさん",
+    first: result.first,
+    last: result.last
+  });
+
+  // const apply_result2 = diffTaker.apply({
+  //   base: apply_result,
+  //   patch: "は神",
+  //   first: result.first,
+  //   last: result.last
+  // });
+
+  // const apply_result3 = diffTaker.apply({
+  //   base: apply_result,
+  //   patch: "はエンジニア",
+  //   first: result.first,
+  //   last: result.last
+  // });
+
+  // console.log(apply_result2);
+  // console.log(apply_result3);
+
+  console.log(apply_result == apply_excpected);
 };
 
 console.log("getLastSameCharIndex:");
