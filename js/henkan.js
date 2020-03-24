@@ -89,7 +89,7 @@ class CloudHenkan extends AbstractHenkan {
     for (let url of CLOUD_HENKAN_URLS) {
       const msg = encodeURIComponent(diff);
       const res = await axios.get(`${url}?msg=${msg}`);
-      const converted = `${decodeURI(res.data.result)}\n`;
+      const converted = `${decodeURIComponent(res.data.result)}\n`;
       hits.push(converted);
     }
 

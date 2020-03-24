@@ -27,8 +27,8 @@ const update = async () => {
 
   const res = await axios.get(`${UPDATE_URL}?first=${first}`);
   const decodedRes = res.data.map(({ id, yomi, kaki }) => {
-    const decodedYomi = decodeURI(yomi);
-    const decodedKaki = decodeURI(kaki);
+    const decodedYomi = decodeURIComponent(yomi);
+    const decodedKaki = decodeURIComponent(kaki);
 
     return { id, yomi: decodedYomi, kaki: decodedKaki };
   });
@@ -43,4 +43,4 @@ const reset = async () => {
   await setLocalStorage({ dict: [] });
 };
 
-// reset();
+reset();
