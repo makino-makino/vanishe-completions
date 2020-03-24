@@ -22,6 +22,10 @@ const update = async () => {
   if (!dict.length) {
     dict = [];
   } else {
+    dict = dict.sort((a, b) => {
+      return a.id - b.id;
+    });
+
     first = Number(dict[dict.length - 1].id) + 1;
   }
 
