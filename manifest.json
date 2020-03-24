@@ -7,8 +7,8 @@
     {
       "matches": ["https://*/*", "http://*/*"],
       "js": [
-        "dict/urls.js",
-        "dict/words.js",
+        "config/urls.js",
+        "config/words.js",
         "lib/axios.js",
         "js/axios.js",
         "js/io.js",
