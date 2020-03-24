@@ -1,5 +1,3 @@
-axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
-
 class AbstractHenkan {
   constructor() {
     this.henkanIndex = 0;

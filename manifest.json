@@ -10,6 +10,7 @@
         "dict/urls.js",
         "dict/words.js",
         "lib/axios.js",
+        "js/axios.js",
         "js/io.js",
         "js/diff.js",
         "js/henkan.js",
