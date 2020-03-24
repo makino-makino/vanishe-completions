@@ -46,5 +46,3 @@ const update = async () => {
 const reset = async () => {
   await setLocalStorage({ dict: [] });
 };
-
-reset();

@@ -1,6 +1,7 @@
 const KEYCODE = {
   F7: 118,
   F8: 119,
+  F9: 120,
   ENETR: 13,
   SPACE: 32
 };
@@ -46,6 +47,9 @@ window.addEventListener(
     } else if (keyCode == KEYCODE.F8) {
       const result = await cloudCompletion.complete();
       io.write(result);
+    } else if (keyCode == KEYCODE.F9) {
+      await reset();
+      await update();
     }
   },
   true
