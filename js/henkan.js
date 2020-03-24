@@ -13,8 +13,6 @@ class AbstractHenkan {
 
   async henkan(diff, selecter) {
     // selecter は-1か1
-
-    console.log(this.henkanList.indexOf(diff), diff);
     if (this.henkanList.indexOf(diff) == -1) {
       this.henkanList = await this.generateHenkanList(diff);
       this.henkanIndex = 0;
@@ -41,8 +39,6 @@ class Henkan extends AbstractHenkan {
 
     const updatedDictionary = await getLocalStorage("dict");
     const words = DEFAULT_DIRECTIES.concat(updatedDictionary);
-
-    console.log(words);
 
     for (let word of words) {
       if (!word.yomi.indexOf(diff)) {
