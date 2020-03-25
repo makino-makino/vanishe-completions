@@ -39,11 +39,15 @@ class Henkan extends AbstractHenkan {
     const words = DEFAULT_DIRECTIES.concat(updatedDictionary);
 
     for (let word of words) {
-      if (!word.yomi.indexOf(diff)) {
-        hits.push(word.kaki);
+      try {
+        if (!word.yomi.indexOf(diff)) {
+          hits.push(word.kaki);
+        }
+      } catch (e) {
+        console.log(e);
+        console.log(word);
       }
     }
-
     return hits;
   }
 }
